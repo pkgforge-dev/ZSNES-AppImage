@@ -17,6 +17,7 @@ pacman -Syu --noconfirm \
     lib32-libpulse \
     lib32-mesa     \
     lib32-sdl3     \
+    nasm           \
     python
 
 echo "Installing debloated packages..."
