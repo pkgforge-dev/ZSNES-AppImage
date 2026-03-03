@@ -11,7 +11,7 @@ export ICON=https://raw.githubusercontent.com/xyproto/zsnes/refs/heads/main/icon
 export DEPLOY_OPENGL=1
 
 # Deploy dependencies
-quick-sharun /PATH/TO/BINARY_AND_LIBRARIES_HERE
+quick-sharun ./AppDir/bin/zsnes
 
 # Additional changes can be done in between here
 
