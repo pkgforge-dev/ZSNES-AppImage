@@ -6,10 +6,18 @@ ARCH=$(uname -m)
 
 echo "Installing package dependencies..."
 echo "---------------------------------------------------------------"
+tee -a /etc/pacman.conf <<EOF
+
+[multilib]
+Include = /etc/pacman.d/mirrorlist
+EOF
 pacman -Syu --noconfirm \
-    libdecor \
-    python   \
-    sdl2
+    lib32-libdecor \
+    lib32-libglvnd \
+    lib32-libpulse \
+    lib32-mesa     \
+    lib32-sdl3     \
+    python
 
 echo "Installing debloated packages..."
 echo "---------------------------------------------------------------"
