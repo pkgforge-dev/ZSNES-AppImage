@@ -24,7 +24,7 @@ echo "Installing debloated packages..."
 echo "---------------------------------------------------------------"
 get-debloated-pkgs --add-common --prefer-nano
 
-echo "Making nightly build of ZSNES..."
+echo "Building ZSNES..."
 echo "---------------------------------------------------------------"
 REPO="https://github.com/xyproto/zsnes"
 VERSION="$(git ls-remote "$REPO" HEAD | cut -c 1-9 | head -1)"
