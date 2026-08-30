@@ -20,7 +20,7 @@ echo "---------------------------------------------------------------"
 REPO="https://github.com/xyproto/zsnes"
 VERSION="$(git ls-remote "$REPO" HEAD | cut -c 1-9 | head -1)"
 git clone "$REPO" ./zsnes
-git -C ./zsnes apply patches/fix-gui-wallpaper-click-crash.patch
+git -C ./zsnes apply "$PWD"/patches/fix-gui-wallpaper-click-crash.patch
 echo "$VERSION" > ~/version
 
 mkdir -p ./AppDir/bin
