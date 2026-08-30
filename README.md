@@ -7,7 +7,7 @@
 [![Latest Stable Release](https://img.shields.io/github/v/release/pkgforge-dev/ZSNES-AppImage)](https://github.com/pkgforge-dev/ZSNES-AppImage/releases/latest)
 
 <p align="center">
-  <img src="https://github.com/xyproto/zsnes/blob/main/icons/128x128x32.png" width="128" />
+  <img src="https://raw.githubusercontent.com/xyproto/zsnes/refs/heads/main/img/128x128x32.png" width="128" />
 </p>
 
 
