@@ -6,23 +6,14 @@ ARCH=$(uname -m)
 
 echo "Installing package dependencies..."
 echo "---------------------------------------------------------------"
-tee -a /etc/pacman.conf <<EOF
-
-[multilib]
-Include = /etc/pacman.d/mirrorlist
-EOF
 pacman -Syu --noconfirm \
-    lib32-libdecor \
-    lib32-libglvnd \
-    lib32-libpulse \
-    lib32-mesa     \
-    lib32-sdl3     \
-    nasm           \
-    python
+    nasm     \
+    python   \
+    sdl3
 
 echo "Installing debloated packages..."
 echo "---------------------------------------------------------------"
-get-debloated-pkgs --add-common --prefer-nano
+get-debloated-pkgs --add-common --prefer-nano libdecor-mini
 
 echo "Building ZSNES..."
 echo "---------------------------------------------------------------"
@@ -33,5 +24,5 @@ echo "$VERSION" > ~/version
 
 mkdir -p ./AppDir/bin
 cd ./zsnes
-make -j$(nproc)
+make -j$(nproc) BITS=64 WITH_OPENGL=
 mv -v zsnes ../AppDir/bin
