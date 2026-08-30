@@ -1,0 +1,26 @@
+Fix SIGSEGV when clicking the GUI background/wallpaper with no windows open
+
+GUIgetcurrentinput() (gui/guikeys.c) computed "GUIwinptr - 1" as an
+unsigned value even when GUIwinptr was 0, so GUIwinorder[0xFFFFFFFF]
+was read and whatever globals neighbour GUIwinorder in BSS got
+dispatched through the per-window key switch. Depending on that
+garbage this segfaults, e.g. clicking the interface wallpaper with
+no window open. The same code was harmless as 32-bit assembly, which
+is why this only surfaced in the C11/64-bit ports.
+
+Guard the window-key dispatch with GUIwinptr != 0: with no window
+open there is nothing to dispatch to. ESC with no windows open still
+quits to the game, and key handling with windows open is unchanged.
+diff --git a/gui/guikeys.c b/gui/guikeys.c
+index a45debae..5f0ed8df 100644
+--- a/gui/guikeys.c
++++ b/gui/guikeys.c
+@@ -1640,7 +1640,7 @@ done:
+         if (al == 27 && GUIwinptr == 0) {
+             if (romloadskip == 0)
+                 GUIQuit = 2;
+-        } else {
++        } else if (GUIwinptr != 0) {
+             u4 const eax = GUIwinptr - 1;
+             u4 const ebx = GUIwinorder[eax];
+             if (al == 27 && (ebx != 13 || CheatWinMode <= 1)) { // Close window
