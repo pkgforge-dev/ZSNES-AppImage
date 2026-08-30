@@ -9,7 +9,7 @@ export ADD_HOOKS="self-updater.hook"
 export UPINFO="gh-releases-zsync|${GITHUB_REPOSITORY%/*}|${GITHUB_REPOSITORY#*/}|latest|*$ARCH.AppImage.zsync"
 export ICON=https://raw.githubusercontent.com/xyproto/zsnes/refs/heads/main/icons/128x128x32.png
 export DESKTOP=https://raw.githubusercontent.com/xyproto/zsnes/refs/heads/main/linux/zsnes.desktop
-export USE_HOST_DRIVERS_EXPERIMENTAL=1
+export DEPLOY_OPENGL=1
 export LIB_DIR=/usr/lib32
 
 # Deploy dependencies
