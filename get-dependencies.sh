@@ -6,32 +6,24 @@ ARCH=$(uname -m)
 
 echo "Installing package dependencies..."
 echo "---------------------------------------------------------------"
-tee -a /etc/pacman.conf <<EOF
-
-[multilib]
-Include = /etc/pacman.d/mirrorlist
-EOF
 pacman -Syu --noconfirm \
-    lib32-libdecor \
-    lib32-libglvnd \
-    lib32-libpulse \
-    lib32-mesa     \
-    lib32-sdl3     \
-    nasm           \
-    python
+    nasm     \
+    python   \
+    sdl3
 
 echo "Installing debloated packages..."
 echo "---------------------------------------------------------------"
-get-debloated-pkgs --add-common --prefer-nano
+get-debloated-pkgs --add-common --prefer-nano libdecor-mini
 
 echo "Building ZSNES..."
 echo "---------------------------------------------------------------"
 REPO="https://github.com/xyproto/zsnes"
 VERSION="$(git ls-remote "$REPO" HEAD | cut -c 1-9 | head -1)"
 git clone "$REPO" ./zsnes
+git -C ./zsnes apply "$PWD"/patches/fix-gui-wallpaper-click-crash.patch
 echo "$VERSION" > ~/version
 
 mkdir -p ./AppDir/bin
 cd ./zsnes
-make -j$(nproc)
+make -j$(nproc) BITS=64
 mv -v zsnes ../AppDir/bin
