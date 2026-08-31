@@ -9,14 +9,10 @@ export ADD_HOOKS="self-updater.hook"
 export UPINFO="gh-releases-zsync|${GITHUB_REPOSITORY%/*}|${GITHUB_REPOSITORY#*/}|latest|*$ARCH.AppImage.zsync"
 export ICON=https://raw.githubusercontent.com/xyproto/zsnes/refs/heads/main/img/128x128x32.png
 export DESKTOP=https://raw.githubusercontent.com/xyproto/zsnes/refs/heads/main/linux/zsnes.desktop
-export DEPLOY_OPENGL=0
-export SDL_RENDER_DRIVER=software
+export DEPLOY_OPENGL=1
 
 # Deploy dependencies
 quick-sharun ./AppDir/bin/zsnes
-
-# force the software renderer at runtime too, so SDL never dlopens the GL stack
-echo 'SDL_RENDER_DRIVER=software' >> ./AppDir/.env
 
 # Turn AppDir into AppImage
 quick-sharun --make-appimage

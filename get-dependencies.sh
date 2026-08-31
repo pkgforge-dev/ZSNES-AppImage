@@ -25,5 +25,5 @@ echo "$VERSION" > ~/version
 
 mkdir -p ./AppDir/bin
 cd ./zsnes
-make -j$(nproc) BITS=64 WITH_OPENGL=
+make -j$(nproc) BITS=64
 mv -v zsnes ../AppDir/bin
