@@ -6,10 +6,7 @@ ARCH=$(uname -m)
 
 echo "Installing package dependencies..."
 echo "---------------------------------------------------------------"
-pacman -Syu --noconfirm \
-    nasm     \
-    python   \
-    sdl3
+pacman -Syu --noconfirm nasm sdl3
 
 echo "Installing debloated packages..."
 echo "---------------------------------------------------------------"
@@ -19,7 +16,7 @@ echo "Building ZSNES..."
 echo "---------------------------------------------------------------"
 REPO="https://github.com/xyproto/zsnes"
 VERSION="$(git ls-remote "$REPO" HEAD | cut -c 1-9 | head -1)"
-git clone "$REPO" ./zsnes
+git clone --depth 1 "$REPO" ./zsnes
 git -C ./zsnes apply "$PWD"/patches/fix-gui-wallpaper-click-crash.patch
 echo "$VERSION" > ~/version
 
