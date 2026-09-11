@@ -6,10 +6,7 @@ ARCH=$(uname -m)
 
 echo "Installing package dependencies..."
 echo "---------------------------------------------------------------"
-pacman -Syu --noconfirm \
-    nasm     \
-    python   \
-    sdl3
+pacman -Syu --noconfirm nasm sdl3
 
 echo "Installing debloated packages..."
 echo "---------------------------------------------------------------"
